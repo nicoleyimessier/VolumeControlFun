@@ -7,3 +7,9 @@
 [submodule "ExternalAddons/ofxAnimatable"]
 	path = ExternalAddons/ofxAnimatable
 	url = https://github.com/armadillu/ofxAnimatable
+[submodule "ofxInterface"]
+	path = ofxInterface
+	url = https://github.com/galsasson/ofxInterface.git
+[submodule "ExternalAddons/ofxInterface"]
+	path = ExternalAddons/ofxInterface
+	url = https://github.com/galsasson/ofxInterface.git
