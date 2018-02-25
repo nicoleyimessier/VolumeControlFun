@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetBackgroundColor(255);
+    ofSetBackgroundColor(0);
     
     // ---  SCENEGRAPH ---
     //set up the scene with width + height
@@ -55,22 +55,22 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+   
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    ofxInterface::TouchManager::one().touchMove(button, ofVec2f(x,y));
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    ofxInterface::TouchManager::one().touchDown(button, ofVec2f(x,y));
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    ofxInterface::TouchManager::one().touchUp(button, ofVec2f(x,y));
 }
 
 //--------------------------------------------------------------

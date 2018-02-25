@@ -24,8 +24,12 @@ public:
     void onTouchMove(ofxInterface::TouchEvent& event);
     void onTouchUp(ofxInterface::TouchEvent& event);
     
+    // --- ATTRIBUTES---
+    void setVolumeHeight(float _vh);
+    
 private:
     
-
+    // --- ATTRIBUTES---
+    float volumHeight = 0.0f;
     
 };
