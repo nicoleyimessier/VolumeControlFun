@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "VolumeBarManager.h"
+#include "ofxInterface.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +22,15 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+    
+    // ---  SCENEGRAPH ---
+    ofxInterface::Node* scene;
+    
+    // ---  VOLUME BAR MANAGER ---
+    VolumeBarManager *vbMan;
+    float margin = 100.0f;
+    
+    // --- MIS ---
+    float dt = 1/60.0f;
+    bool showDebug = false; 
 };
