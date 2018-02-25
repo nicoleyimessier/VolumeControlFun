@@ -1,0 +1,9 @@
+[submodule "openFrameworks"]
+	path = openFrameworks
+	url = https://github.com/openframeworks/openFrameworks.git
+[submodule "ExternalAddons/ofxRemoteUI"]
+	path = ExternalAddons/ofxRemoteUI
+	url = https://github.com/armadillu/ofxRemoteUI
+[submodule "ExternalAddons/ofxAnimatable"]
+	path = ExternalAddons/ofxAnimatable
+	url = https://github.com/armadillu/ofxAnimatable
