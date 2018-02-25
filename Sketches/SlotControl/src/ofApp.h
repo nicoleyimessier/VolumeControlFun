@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "VolumeBarManager.h"
 #include "ofxInterface.h"
+#include "ofxRemoteUIServer.h"
 
 class ofApp : public ofBaseApp{
 
@@ -32,5 +33,9 @@ class ofApp : public ofBaseApp{
     
     // --- MIS ---
     float dt = 1/60.0f;
-    bool showDebug = false; 
+    bool showDebug = false;
+    
+    // --- DEBUG INDEX ---
+    float index = 0.0f;
+    bool debugIndex = false; 
 };

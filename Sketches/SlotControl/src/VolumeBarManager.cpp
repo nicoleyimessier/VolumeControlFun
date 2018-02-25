@@ -48,7 +48,29 @@ void VolumeBarManager::setupVolumneBars(){
 }
 
 void VolumeBarManager::update(float dt){
+    updateIndex();
     
+    if(!beingTouched){
+        
+        
+        index -= currentVel;
+        
+        //Dampen velocity
+        currentVel *= velFriction;
+        
+        float tempIndex = index;
+        targetIndex = round(tempIndex);
+        loopIndex();
+        
+        if(fabs(currentVel) < swipeVelRange ){
+            
+            index = ofLerp(index, targetIndex, indexLerpAmt);
+
+        }
+    
+    } else {
+    
+    }
 }
 
 void VolumeBarManager::draw(){
@@ -62,17 +84,73 @@ void VolumeBarManager::draw(){
     
 }
 
+#pragma mark SLOT MACHINE
+void VolumeBarManager::updateIndex(){
+    if(!volumeBars.size()) return;
+    
+    for(int i=0; i < volumeBars.size(); i++){
+        ofVec2f pos;
+        float step =  getSize().x/(float)NUM_BARS;
+        pos.x = step*(i) + step*index;
+        
+        if(pos.x > getSize().x){
+            pos.x -= getSize().x;
+        }
+        
+        pos.y = volumeBars[i]->getPosition().y;
+        volumeBars[i]->setPosition((ofVec3f)pos);
+    }
+}
+
+void VolumeBarManager::loopIndex(){
+    if(!(volumeBars.size() - 1)) return;
+    
+    //SET BOUNDARIES
+    float minRange = -1.0f;
+    float maxRange = volumeBars.size() - 1;
+    float fullRange = volumeBars.size();
+    
+    //LOOP POSITIVE
+    while(index < minRange){
+        index +=fullRange;
+    }
+    
+    //LOOP MINUS
+    while(index > maxRange){
+        index -= fullRange;
+    }
+}
+
+
+void VolumeBarManager::setIndex(float _index){
+    index = _index;
+}
+
 #pragma mark TOUCH
 
 void VolumeBarManager::onTouchDown(ofxInterface::TouchEvent& event){
     beingTouched = true;
     touchAnchor = toLocal(event.position);
+    
+    // --- SLOT MACHINE ---
+    lastTouch = touchAnchor.x;
+    startTime = ofGetElapsedTimef();
 }
 
 void VolumeBarManager::onTouchMove(ofxInterface::TouchEvent& event){
     beingTouched = true;
+    ofVec2f local = toLocal(event.position);
+    
+    // --- SLOT MACHINE ---
+    float offset = (local.x - lastTouch);
+    index += -offset;
+    lastTouch = local.x;
+    loopIndex();
+    endTime = ofGetElapsedTimef();
 }
 
 void VolumeBarManager::onTouchUp(ofxInterface::TouchEvent& event){
     beingTouched = false;
+    
+    currentVel = fabs(touchAnchor.x - lastTouch)/endTime - startTime;
 }

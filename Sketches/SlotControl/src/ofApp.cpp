@@ -4,6 +4,11 @@
 void ofApp::setup(){
     ofSetBackgroundColor(0);
     
+    // ---  REMOTE UI ---
+    RUI_SETUP();
+    RUI_SHARE_PARAM(index, 0, 10);
+    RUI_LOAD_FROM_XML();
+    
     // ---  SCENEGRAPH ---
     //set up the scene with width + height
     scene = new ofxInterface::Node();
@@ -24,10 +29,14 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     // ---  SCENEGRAPH ---
-    
     //update touch manager
     ofxInterface::TouchManager::one().update();
     scene->updateSubtree(dt, true);
+    
+    if(debugIndex){
+        //INDEX TEXT
+        vbMan->setIndex(index);
+    }
 }
 
 //--------------------------------------------------------------
